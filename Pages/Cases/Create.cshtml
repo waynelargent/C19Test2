@@ -1,0 +1,82 @@
+﻿@page
+@model C19Test2.Pages.Cases.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Case</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Case.FirstName" class="control-label"></label>
+                <input asp-for="Case.FirstName" class="form-control" />
+                <span asp-validation-for="Case.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Case.LastName" class="control-label"></label>
+                <input asp-for="Case.LastName" class="form-control" />
+                <span asp-validation-for="Case.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Case.SNumber" class="control-label"></label>
+                <input asp-for="Case.SNumber" class="form-control" />
+                <span asp-validation-for="Case.SNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Case.ExposureDate" class="control-label"></label>
+                <input asp-for="Case.ExposureDate" class="form-control" />
+                <span asp-validation-for="Case.ExposureDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Case.StatusID" class="control-label"></label>
+                <select asp-for="Case.StatusID" class="form-control">
+                    <option value="">-- Select Status --</option>
+                    @foreach (var item in Model.StatusSL)
+                    {
+                        <option value="@item.StatusID">@item.StatusDescription</option>
+                    }
+                </select>
+                <span asp-validation-for="Case.StatusID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Case.LocationID" class="control-label"></label>
+                <select asp-for="Case.LocationID" class="form-control">
+                    <option value="">-- Select Location --</option>
+                    @foreach (var item in Model.LocationSL)
+                    {
+                        <option value="@item.LocationID">@item.LocationDescription</option>
+                    }
+                </select>
+                <span asp-validation-for="Case.LocationID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Case.DepartmentID" class="control-label"></label>
+                <select asp-for="Case.DepartmentID" class="form-control">
+                    <option value="">-- Select Department --</option>
+                    @foreach (var item in Model.DepartmentSL)
+                    {
+                        <option value="@item.DepartmentID">@item.DepartmentDescription</option>
+                    }
+                </select>
+                <span asp-validation-for="Case.DepartmentID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

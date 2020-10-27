@@ -1,0 +1,104 @@
+﻿@page
+@model C19Test2.Pages.Cases.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Case</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Case.CaseID" />
+            <div class="form-group">
+                <label asp-for="Case.FirstName" class="control-label"></label>
+                <input asp-for="Case.FirstName" class="form-control" />
+                <span asp-validation-for="Case.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Case.LastName" class="control-label"></label>
+                <input asp-for="Case.LastName" class="form-control" />
+                <span asp-validation-for="Case.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Case.SNumber" class="control-label"></label>
+                <input asp-for="Case.SNumber" class="form-control" />
+                <span asp-validation-for="Case.SNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Case.ExposureDate" class="control-label"></label>
+                <input asp-for="Case.ExposureDate" class="form-control" />
+                <span asp-validation-for="Case.ExposureDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Case.StatusID" class="control-label"></label>
+                <select asp-for="Case.StatusID" class="form-control">
+                    <option value="">-- Select Status --</option>
+                    @foreach (var item in Model.StatusSL)
+                    {
+                        @if (item.StatusID == Model.Case.StatusID)
+                        {
+                            <option value="@item.StatusID" selected>@item.StatusDescription  </option>
+                        }
+                        else
+                        {
+                            <option value="@item.StatusID">@item.StatusDescription  </option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="Case.StatusID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Case.LocationID" class="control-label"></label>
+                <select asp-for="Case.LocationID" class="form-control">
+                    <option value="">-- Select Status --</option>
+                    @foreach (var item in Model.LocationSL)
+                    {
+                        @if (item.LocationID == Model.Case.LocationID)
+                        {
+                            <option value="@item.LocationID" selected>@item.LocationDescription  </option>
+                        }
+                        else
+                        {
+                            <option value="@item.LocationID">@item.LocationDescription  </option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="Case.LocationID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Case.DepartmentID" class="control-label"></label>
+                <select asp-for="Case.LocationID" class="form-control">
+                    <option value="">-- Select Department --</option>
+                    @foreach (var item in Model.DepartmentSL)
+                    {
+                        @if (item.DepartmentID == Model.Case.DepartmentID)
+                        {
+                            <option value="@item.DepartmentID" selected>@item.DepartmentDescription  </option>
+                        }
+                        else
+                        {
+                            <option value="@item.DepartmentID">@item.DepartmentDescription  </option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="Case.DepartmentID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
