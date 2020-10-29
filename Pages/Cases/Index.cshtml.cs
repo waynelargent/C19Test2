@@ -20,6 +20,7 @@ namespace C19Test2.Pages.Cases
         }
 
         public IList<Case> Case { get; set; }
+        
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
         [BindProperty(SupportsGet = true)]
@@ -34,10 +35,25 @@ namespace C19Test2.Pages.Cases
             //select d;
 
             var caseqry = from x in _context.Case
-                          join xs in _context.Status on x.StatusID equals xs.StatusID
-                          join xl in _context.Location on x.LocationID equals xl.LocationID
-                          join xd in _context.Department on x.DepartmentID equals xd.DepartmentID
-                          select x;
+                       //join xs in _context.Status on x.StatusID equals xs.StatusID
+                       //join xl in _context.Location on x.LocationID equals xl.LocationID
+                       //join xd in _context.Department on x.DepartmentID equals xd.DepartmentID
+                   select x;
+                   //select new 
+                   //       {
+                   //           x.LastName,
+                   //           x.FirstName,
+                   //           x.ExposureDate,
+                   //           x.SNumber,
+                   //           x.Status.StatusDescription,
+                   //           x.Location.LocationDescription,
+                   //           x.Department.DepartmentDescription
+                   //       };
+            //var caseqry = _context.Case.
+            //              Include(b => b.Status).
+            //              Include(c => c.Location).
+            //              Include(d => d.Department);
+
             if (!string.IsNullOrEmpty(SearchString))
             {
                 caseqry = caseqry.Where(s => s.LastName.Contains(SearchString));
@@ -47,6 +63,10 @@ namespace C19Test2.Pages.Cases
                 if (SortString == "status")
                 {
                     caseqry = caseqry.OrderBy(x => x.Status.StatusDescription);
+                }
+                if (SortString == "snumber")
+                {
+                    caseqry = caseqry.OrderBy(x => x.SNumber);
                 }
                 else if (SortString == "exposuredateA")
                 {
