@@ -10,6 +10,18 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<form>
+    <p>
+        Last Name: <input type="text" asp-for="SearchString" />
+        Sort By <select asp-for="SortString">
+            <option value=""></option>
+            <option value="status">Status</option>
+            <option value="exposuredateA">Exposure Date (Oldest first)</option>
+            <option value="exposuredateD">ExposureDate (Newest first)</option>
+        </select>
+        <input type="submit" value="Search" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -38,35 +50,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Case) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExposureDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status.StatusDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location.LocationDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Department.DepartmentDescription)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.CaseID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.CaseID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.CaseID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Case)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExposureDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status.StatusDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location.LocationDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department.DepartmentDescription)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.CaseID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.CaseID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.CaseID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

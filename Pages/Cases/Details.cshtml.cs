@@ -28,7 +28,11 @@ namespace C19Test2.Pages.Cases
                 return NotFound();
             }
 
-            Case = await _context.Case.FirstOrDefaultAsync(m => m.CaseID == id);
+            Case = await _context.Case.
+                   Include(b => b.Status).
+                   Include(c => c.Location).
+                   Include(d => d.Department).
+                   FirstOrDefaultAsync(m => m.CaseID == id);
 
             if (Case == null)
             {
